@@ -146,12 +146,15 @@ body {
   width: 280px;
   background-color: var(--color-white);
   border-right: var(--border-width) solid var(--color-black);
-  position: sticky;
+  /* Made sidebar fixed position without scrolling */
+  position: fixed;
+  left: 0;
   top: 88px;
   height: calc(100vh - 88px);
-  overflow-y: auto;
+  overflow: visible;
   padding: 2rem;
   animation: slideInLeft 0.5s ease-out;
+  z-index: 100;
 }
 
 .sidebar-header {
@@ -235,6 +238,8 @@ body {
 
 .main-content {
   flex: 1;
+  /* Added left margin to account for fixed sidebar */
+  margin-left: 280px;
   padding: 2rem;
   min-height: 100vh;
 }
@@ -671,13 +676,15 @@ body {
 /* Responsive Design */
 @media (max-width: 1024px) {
   .sidebar {
-    position: relative;
+    position: fixed;
     left: -300px;
     top: 0;
     height: 100vh;
     z-index: 1001;
     transition: var(--transition);
     box-shadow: none;
+    /* Keep overflow visible on mobile too */
+    overflow: visible;
   }
 
   .sidebar.active {
@@ -691,6 +698,8 @@ body {
 
   .main-content {
     padding: 1.5rem;
+    /* Remove left margin on mobile */
+    margin-left: 0;
   }
 }
 
