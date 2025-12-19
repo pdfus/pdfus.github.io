@@ -671,7 +671,7 @@ body {
 /* Responsive Design */
 @media (max-width: 1024px) {
   .sidebar {
-    position: fixed;
+    position: relative;
     left: -300px;
     top: 0;
     height: 100vh;
