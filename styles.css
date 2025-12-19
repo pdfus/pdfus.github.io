@@ -138,23 +138,26 @@ body {
 .main-wrapper {
   display: flex;
   max-width: 1400px;
-  margin: 0 auto;
+  margin: 2rem auto 0;
   position: relative;
+  padding: 0 2rem;
 }
 
 .sidebar {
   width: 280px;
   background-color: var(--color-white);
-  border-right: var(--border-width) solid var(--color-black);
-  /* Made sidebar completely fixed without any scrolling */
-  position: fixed;
-  left: 0;
-  top: 88px;
-  height: calc(100vh - 88px);
-  overflow: hidden;
+  border: var(--border-width) solid var(--color-black);
+  border-radius: var(--border-radius);
+  position: relative; /* Changed from fixed to relative */
+  top: 0; /* Removed fixed positioning */
+  height: auto; /* Changed from fixed height */
+  overflow: visible; /* Changed from hidden */
   padding: 2rem;
   animation: slideInLeft 0.5s ease-out;
   z-index: 100;
+  margin-right: 2rem;
+  flex-shrink: 0; /* Prevent sidebar from shrinking */
+  align-self: flex-start; /* Align with hero section */
 }
 
 .sidebar-header {
@@ -238,17 +241,36 @@ body {
 
 .main-content {
   flex: 1;
-  /* Added left margin to account for fixed sidebar */
-  margin-left: 280px;
-  padding: 2rem;
+  padding: 0;
   min-height: 100vh;
 }
 
 /* Hero Section */
 .hero {
   text-align: center;
-  padding: 4rem 2rem;
+  padding: 4rem 0 4rem 0;
   margin-bottom: 4rem;
+  border: var(--border-width) solid var(--color-black);
+  border-radius: var(--border-radius);
+  background-color: var(--color-white);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: linear-gradient(90deg, 
+    var(--color-red), 
+    var(--color-yellow), 
+    var(--color-green), 
+    var(--color-blue), 
+    var(--color-purple), 
+    var(--color-pink));
 }
 
 .hero-title {
@@ -259,6 +281,7 @@ body {
   margin-bottom: 2rem;
   text-transform: uppercase;
   letter-spacing: -4px;
+  padding: 0 2rem;
 }
 
 .hero-description {
@@ -266,10 +289,12 @@ body {
   max-width: 700px;
   margin: 0 auto 3rem;
   color: var(--color-black);
+  padding: 0 2rem;
 }
 
 .hero-cta {
   margin-top: 2rem;
+  padding: 0 2rem;
 }
 
 .btn-primary {
@@ -313,6 +338,11 @@ body {
 .btn-secondary:hover {
   background-color: var(--color-yellow);
   transform: translateY(-2px);
+}
+
+/* Content Wrapper for tools and features */
+.content-wrapper {
+  padding: 2rem 0;
 }
 
 /* Tools Section */
@@ -675,31 +705,31 @@ body {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
+  .main-wrapper {
+    flex-direction: column;
+    padding: 0 1.5rem;
+  }
+  
   .sidebar {
-    position: fixed;
-    left: -300px;
-    top: 0;
-    height: 100vh;
-    z-index: 1001;
-    transition: var(--transition);
-    box-shadow: none;
-    /* Remove scrollbar on mobile too */
-    overflow: hidden;
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 2rem;
+    order: 1;
   }
-
-  .sidebar.active {
-    left: 0;
-    box-shadow: 20px 0 40px rgba(0, 0, 0, 0.3);
-  }
-
-  .sidebar-close {
-    display: block;
-  }
-
+  
   .main-content {
-    padding: 1.5rem;
-    /* Remove left margin on mobile */
-    margin-left: 0;
+    order: 2;
+  }
+  
+  .sidebar {
+    position: relative;
+    left: 0;
+    height: auto;
+    overflow: visible;
+  }
+  
+  .sidebar-close {
+    display: none;
   }
 }
 
@@ -729,16 +759,22 @@ body {
   }
 
   .hero {
-    padding: 2rem 1rem;
+    padding: 2rem 0;
   }
 
   .hero-title {
     font-size: 3rem;
     letter-spacing: -2px;
+    padding: 0 1rem;
   }
 
   .hero-description {
     font-size: 1.2rem;
+    padding: 0 1rem;
+  }
+
+  .hero-cta {
+    padding: 0 1rem;
   }
 
   .tools-grid {
@@ -762,6 +798,10 @@ body {
   .logo-text {
     font-size: 1.5rem;
   }
+  
+  .main-wrapper {
+    padding: 0 1rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -782,6 +822,10 @@ body {
   .category-title {
     font-size: 1.5rem;
     padding: 0.8rem;
+  }
+  
+  .sidebar {
+    padding: 1.5rem;
   }
 }
 
