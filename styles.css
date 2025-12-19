@@ -146,12 +146,12 @@ body {
   width: 280px;
   background-color: var(--color-white);
   border-right: var(--border-width) solid var(--color-black);
-  /* Made sidebar fixed position without scrolling */
+  /* Made sidebar completely fixed without any scrolling */
   position: fixed;
   left: 0;
   top: 88px;
   height: calc(100vh - 88px);
-  overflow: visible;
+  overflow: hidden;
   padding: 2rem;
   animation: slideInLeft 0.5s ease-out;
   z-index: 100;
@@ -683,8 +683,8 @@ body {
     z-index: 1001;
     transition: var(--transition);
     box-shadow: none;
-    /* Keep overflow visible on mobile too */
-    overflow: visible;
+    /* Remove scrollbar on mobile too */
+    overflow: hidden;
   }
 
   .sidebar.active {
